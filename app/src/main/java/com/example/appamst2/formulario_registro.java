@@ -33,7 +33,7 @@ public class formulario_registro extends AppCompatActivity {
 
             NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(this,id)
-                            //.setSmallIcon(android.R.drawable.ic_dialog_info)
+                            .setSmallIcon(android.R.drawable.ic_dialog_info)
                             .setContentTitle("Se ha registrado con exito")
                             .setContentText("Revise su correo electronico en los proximos 2 dias")
                             .setAutoCancel(true)
