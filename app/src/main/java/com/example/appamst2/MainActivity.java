@@ -3,6 +3,7 @@ package com.example.appamst2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,8 +38,20 @@ public class MainActivity extends AppCompatActivity {
         fab_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Acciones a realizar cuando se hace clic en el botón flotante del componente video view
-                Toast.makeText(MainActivity.this, "Botón flotante del video presionado", Toast.LENGTH_SHORT).show();
+                // URL del video de YouTube
+                String videoUrl = "https://www.youtube.com/watch?v=OJbeRE1eEkk&ab_channel=Aprendiendoconejemplostec";
+
+                // Crear un intent implícito con la acción ACTION_VIEW
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl));
+
+                // Verificar si la aplicación de YouTube está instalada en el dispositivo
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    // Abrir la aplicación de YouTube con la URL del video
+                    startActivity(intent);
+                } else {
+                    // La aplicación de YouTube no está instalada, mostrar mensaje de error o redirigir a un navegador web
+                    Toast.makeText(MainActivity.this, "La aplicación de YouTube no está instalada", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
