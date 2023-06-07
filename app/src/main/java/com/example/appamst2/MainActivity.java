@@ -98,8 +98,22 @@ public class MainActivity extends AppCompatActivity {
         fab_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Acciones a realizar cuando se hace clic en el botón flotante del componente map
-                Toast.makeText(MainActivity.this, "Botón flotante de map presionado", Toast.LENGTH_SHORT).show();
+                // Obtener la ubicación deseada
+                String location = "-2.1478796,-80.0057693";
+
+                // Crear un intent para abrir Google Maps con la ubicación especificada
+                Uri gmmIntentUri = Uri.parse("geo:" + location + "?z=13"); // "z" representa el nivel de zoom
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps"); // Especificar que se abra en la aplicación de Google Maps
+
+                // Verificar si la aplicación de Google Maps está instalada en el dispositivo
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    // Abrir Google Maps con la ubicación especificada
+                    startActivity(mapIntent);
+                } else {
+                    // La aplicación de Google Maps no está instalada, mostrar mensaje de error o redirigir a un navegador web
+                    Toast.makeText(MainActivity.this, "La aplicación de Google Maps no está instalada", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
