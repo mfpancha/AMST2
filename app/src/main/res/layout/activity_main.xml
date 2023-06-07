@@ -47,4 +47,44 @@
 
     </LinearLayout>
 
+    <!-- Botón flotante para el componente video view -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_video"
+        app:layout_constraintBottom_toTopOf="@id/fab_calendar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón flotante para el componente calendar view -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toTopOf="@id/fab_map"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón flotante para el componente mapa -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_map"
+        app:layout_constraintBottom_toTopOf="@id/fab_chart"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón flotante para componente gráfico lineal estático -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_chart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
