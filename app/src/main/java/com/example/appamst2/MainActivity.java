@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,8 +65,29 @@ public class MainActivity extends AppCompatActivity {
         fab_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Acciones a realizar cuando se hace clic en el botón flotante del componente calendar view
-                Toast.makeText(MainActivity.this, "Botón flotante de calendar view presionado", Toast.LENGTH_SHORT).show();
+                // Obtener la fecha actual
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Crear un intent para abrir la aplicación de calendario
+                Intent intent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendar.getTimeInMillis())
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendar.getTimeInMillis() + 60 * 60 * 1000) // Duración del evento: 1 hora
+                        .putExtra(CalendarContract.Events.TITLE, "Tarea")
+                        .putExtra(CalendarContract.Events.DESCRIPTION, "Descripción de la tarea")
+                        .putExtra(CalendarContract.Events.EVENT_LOCATION, "Ubicación de la tarea");
+
+                // Verificar si la aplicación de calendario está instalada en el dispositivo
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    // Abrir la aplicación de calendario con los datos del evento
+                    startActivity(intent);
+                } else {
+                    // La aplicación de calendario no está instalada, mostrar mensaje de error o redirigir a un navegador web
+                    Toast.makeText(MainActivity.this, "La aplicación de calendario no está instalada", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
